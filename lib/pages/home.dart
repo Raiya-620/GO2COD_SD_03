@@ -1,9 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:rock_paper_scissors_game/pages/choice_screen.dart';
 
 import '../utils/colors.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
+
+  Future<void> _showMyAlert(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Center(
+                child: Text(
+              'Rules',
+            )),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: [
+                  Center(
+                    child: Text('PAPER WINS ROCK'),
+                  ),
+                  Center(
+                    child: Text('ROCK WINS SCISSORS'),
+                  ),
+                  Center(
+                    child: Text('SCISSORS WINS PAPER'),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(color: Colors.black),
+                  ))
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +58,20 @@ class Home extends StatelessWidget {
               child: Image.asset('asset/background.png'),
             ),
             Container(
-              margin: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(16),
               width: MediaQuery.of(context).size.width,
               height: 80,
               child: TextButton(
                 style: TextButton.styleFrom(
                     side: BorderSide(color: AppColors.btnColor, width: 2)),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const GameScreen(),
+                    ),
+                  );
+                },
                 child: Text(
                   'PLAY WITH COMPUTER',
                   style: TextStyle(color: AppColors.bgColor, fontSize: 20.0),
@@ -34,23 +80,14 @@ class Home extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                AlertDialog(
-                  title: Text('Rules'),
-                  content: Column(
-                    children: [
-                      Text('Rock wins scissors'),
-                      Text('Rock wins scissors'),
-                      Text('Rock wins scissors')
-                    ],
-                  ),
-                );
+                _showMyAlert(context);
               },
               child: Text(
                 'See the instructions?',
                 style: TextStyle(color: AppColors.bgColor, fontSize: 20.0),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             )
           ],

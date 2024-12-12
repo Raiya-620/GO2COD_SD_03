@@ -57,29 +57,6 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
-  void showFinalScores(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Final Scores'),
-        content: Text('You: $userScore\nComputer: $computerScore'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-
-              setState(() {
-                userScore = 0;
-                computerScore = 0;
-              });
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
